@@ -2,26 +2,30 @@ import styles from "./styles.module.scss";
 import Image from "next/image";
 import logo from "../../../public/images/logo.svg";
 
-import Link from "next/link";
+import ActiveLink from "../ActiveLink";
 
 export default function Header() {
   return (
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
-        <a href="#">
-          <Image src={logo} alt="Sujeito Programador Logo" />
-        </a>
+        <ActiveLink href="#" activeClassName={styles.active}>
+          <a>
+            <Image src={logo} alt="Sujeito Programador Logo" />
+          </a>
+        </ActiveLink>
 
         <nav>
-          <Link href="/">
-            <a href="#">Home</a>
-          </Link>
-          <Link href="/">
-            <a href="#">Conteúdos</a>
-          </Link>
-          <Link href="/">
-            <a href="#">Quem Somos</a>
-          </Link>
+          <ActiveLink href="/" activeClassName={styles.active}>
+            <a>Home</a>
+          </ActiveLink>
+
+          <ActiveLink href="/posts" activeClassName={styles.active}>
+            <a>Conteúdos</a>
+          </ActiveLink>
+
+          <ActiveLink href="/sobre" activeClassName={styles.active}>
+            <a>Quem Somos</a>
+          </ActiveLink>
         </nav>
 
         <a
