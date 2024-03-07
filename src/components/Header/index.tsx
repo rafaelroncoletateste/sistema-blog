@@ -8,22 +8,22 @@ export default function Header() {
   return (
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
-        <ActiveLink href="#" activeClassName={styles.active}>
+        <ActiveLink href="#" activeClassName={styles.active} legacyBehavior>
           <a>
             <Image src={logo} alt="Sujeito Programador Logo" />
           </a>
         </ActiveLink>
 
         <nav>
-          <ActiveLink href="/" activeClassName={styles.active}>
+          <ActiveLink href="/" activeClassName={styles.active} legacyBehavior>
             <a>Home</a>
           </ActiveLink>
 
-          <ActiveLink href="/posts" activeClassName={styles.active}>
+          <ActiveLink href="/posts" activeClassName={styles.active} legacyBehavior>
             <a>Conteúdos</a>
           </ActiveLink>
 
-          <ActiveLink href="/sobre" activeClassName={styles.active}>
+          <ActiveLink href="/sobre" activeClassName={styles.active} legacyBehavior>
             <a>Quem Somos</a>
           </ActiveLink>
         </nav>
