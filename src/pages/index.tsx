@@ -22,12 +22,11 @@ export default function Home() {
             <a>
               <button>Começar agora!</button>
             </a>
-
-            <img
-              src="/images/banner-conteudos.png"
-              alt="Conteúdos do Sujeito Programador"
-            />
           </section>
+          <img
+            src="/images/banner-conteudos.png"
+            alt="Conteúdos do Sujeito Programador"
+          />
         </div>
 
         <hr className={styles.divisor} />
