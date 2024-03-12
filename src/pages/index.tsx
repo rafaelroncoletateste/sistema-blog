@@ -1,10 +1,32 @@
+import { GetStaticProps } from "next";
+
 import Head from "next/head";
 import styles from "../styles/home.module.scss";
 
 import Image from "next/image";
 import techsImage from "../../public/images/techs.svg";
 
-export default function Home() {
+import { getPrismicClient } from "../services/prismic";
+import Prismic from "@prismicio/client";
+import { RichText } from "prismic-dom";
+
+type Content = {
+  title: string;
+  titleContent: string;
+  linkAction: string;
+  mobileTitle: string;
+  mobileContent: string;
+  mobile_banner: string;
+  webTitle: string;
+  webContent: string;
+  webBanner: string;
+};
+
+interface ContentProps {
+  content: Content;
+}
+
+export default function Home({ content }: ContentProps) {
   return (
     <>
       <Head>
@@ -73,3 +95,40 @@ export default function Home() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const prismic = getPrismicClient();
+
+  const response = await prismic.query([
+    Prismic.Predicates.at("document.type", "home"),
+  ]);
+
+  const {
+    title,
+    sub_title,
+    link_action,
+    mobile,
+    mobile_content,
+    mobile_banner,
+    title_web,
+    web_content,
+    web_banner,
+  } = response.results[0].data;
+
+  const content = {
+    title: RichText.asText(title),
+    titleContent: RichText.asText(sub_title),
+    linkAction: link_action.url,
+    mobileTitle: RichText.asText(mobile),
+    mobileContent: RichText.asText(mobile_content),
+    mobile_banner: mobile_banner.url,
+    webTitle: RichText.asText(title_web),
+    webContent: RichText.asText(web_content),
+    webBanner: web_banner.url,
+  };
+
+  return {
+    props: { content },
+    revalidate: 60 * 3, // Vai ser regerada a cada 180 segundos (3 minutos)
+  };
+};
