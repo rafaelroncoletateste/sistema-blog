@@ -6,6 +6,13 @@ import Image from "next/image";
 
 import thumbImg from "../../../public/images/thumb.png";
 
+import {
+  FiChevronLeft,
+  FiChevronsLeft,
+  FiChevronRight,
+  FiChevronsRight,
+} from "react-icons/fi";
+
 export default function Posts() {
   return (
     <>
@@ -31,6 +38,26 @@ export default function Posts() {
               soluta explicabo veniam perferendis!
             </p>
           </Link>
+
+          <div className={styles.buttonNavigate}>
+            <div>
+              <button>
+                <FiChevronsLeft size={25} color="#FFF" />
+              </button>
+              <button>
+                <FiChevronLeft size={25} color="#FFF" />
+              </button>
+            </div>
+
+            <div>
+              <button>
+                <FiChevronsRight size={25} color="#FFF" />
+              </button>
+              <button>
+                <FiChevronRight size={25} color="#FFF" />
+              </button>
+            </div>
+          </div>
         </div>
       </main>
     </>
