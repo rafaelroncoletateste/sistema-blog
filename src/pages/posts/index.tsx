@@ -1,4 +1,5 @@
 import { GetStaticProps } from "next";
+import { useState } from "react";
 
 import Head from "next/head";
 
@@ -31,7 +32,9 @@ interface PostsProps {
   posts: Post[];
 }
 
-export default function Posts({ posts }: PostsProps) {
+export default function Posts({ posts: postsBlog }: PostsProps) {
+  const [posts, setPosts] = useState(postsBlog || []);
+
   return (
     <>
       <Head>
@@ -40,22 +43,22 @@ export default function Posts({ posts }: PostsProps) {
 
       <main className={styles.container}>
         <div className={styles.posts}>
-          <Link href="/">
-            <Image
-              src={thumbImg}
-              alt="Post título 1"
-              width={720}
-              height={410}
-              quality={100}
-            />
-            <strong>Criando meu Primeiro Aplicativo</strong>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum in
-              sunt, iure asperiores, officiis autem molestiae suscipit nesciunt,
-              perferendis expedita minus illum. Facere inventore expedita natus
-              soluta explicabo veniam perferendis!
-            </p>
-          </Link>
+          {posts.map((post) => (
+            <Link key={post.slug} href={`/post/${post.slug}`}>
+              <Image
+                src={post.cover}
+                alt={post.title}
+                width={720}
+                height={410}
+                quality={100}
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==
+                "
+              />
+              <strong>{post.title}</strong>
+              <p>{post.description}</p>
+            </Link>
+          ))}
 
           <div className={styles.buttonNavigate}>
             <div>
