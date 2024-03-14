@@ -76,6 +76,9 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 
   return {
-    props: { content },
+    props: {
+      content,
+    },
+    revalidate: 60 * 15, // Irá revalidar a cada 15 minutos
   };
 };
